@@ -2,6 +2,9 @@
 
 紀錄學習 Machine-Learning 及 Data-Mining 的過程。
 
+## Data-Mining
+* [Facebook 貼文分析](https://github.com/YanHaoChen/Machine-Learning-and-Data-Mining/tree/master/facebook_post) (30%)
+
 ## Hadoop
 
 * pm25
@@ -10,5 +13,5 @@
 
 ## Scikit-Learn
 
-[手寫數字辨識](https://github.com/YanHaoChen/Machine-Learning-and-Data-Mining/tree/master/sklearn/Support-Vector-Classification)
+* [手寫數字辨識](https://github.com/YanHaoChen/Machine-Learning-and-Data-Mining/tree/master/sklearn/Support-Vector-Classification)
 
