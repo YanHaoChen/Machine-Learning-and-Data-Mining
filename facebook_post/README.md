@@ -5,4 +5,4 @@
 
 此資料集主要是想透過其中的貼文參數進行機器學習，進而推測出貼文會獲得留言數。在此雖然不是要進行機器學習，而是用來做資料分析，但應該也是會頗有趣的！
 
-* Part 1：[資料前處理＋敘述統計](https://github.com/YanHaoChen/Machine-Learning-and-Data-Mining/tree/master/facebook_post/part1)
+* Part 1：[資料前處理＋敘述統計](https://github.com/YanHaoChen/Machine-Learning-and-Data-Mining/tree/master/facebook_post/part1.md)
