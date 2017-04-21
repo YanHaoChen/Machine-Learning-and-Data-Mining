@@ -23,7 +23,7 @@ ax.fig.savefig('./facebook_post/images/likes_histogram.png')
 
 製作出的圖表如下：
 
-![likes_histgram](https://github.com/YanHaoChen/Machine-Learning-and-Data-Mining/tree/master/facebook_post/images/likes_histogram.png?raw=true)
+![likes_histgram](https://raw.githubusercontent.com/YanHaoChen/Machine-Learning-and-Data-Mining/master/facebook_post/images/likes_histogram.png)
 
 從圖表中，能發現此資料是屬於 Power Law Distribution（冪次現象）。也應此可以對此資料多一些見解，例如：可能符合**二八法則**或跟**長尾理論**有關。
 
@@ -35,7 +35,7 @@ ax.fig.savefig('./facebook_post/images/visited_boxplot.png')
 ```
 製作出的圖表如下：
 
-![likes_boxplot](https://github.com/YanHaoChen/Machine-Learning-and-Data-Mining/tree/master/facebook_post/images/likes_boxplot.png?raw=true)
+![likes_boxplot](https://raw.githubusercontent.com/YanHaoChen/Machine-Learning-and-Data-Mining/master/facebook_post/images/likes_boxplot.png)
 
 也因為此資料的特性，可以發現**上下鄰近值**、**上下樞紐**及**中位值**幾乎就一條線的狀況，而且還有數值高很多的離群值。此圖也彰顯了 Power Law Distribution。
 
@@ -65,9 +65,9 @@ ax.fig.savefig('./facebook_post/images/first_analysis_data_scatter.png')
 ```
 製作出的圖表如下：
 
-![likes_boxplot](https://github.com/YanHaoChen/Machine-Learning-and-Data-Mining/tree/master/facebook_post/images/first_analysis_data_scatter.png?raw=true)
+![likes_boxplot](https://raw.githubusercontent.com/YanHaoChen/Machine-Learning-and-Data-Mining/master/facebook_post/images/first_analysis_data_scatter.png)
 
 從中可以發現：
 
 * **total comments** 跟 **visited** 之間的分佈較為分散。很直覺的可以想到，**曝光率（visited）跟會產生的留言（total comments）關係可能沒有那麼強烈**。
-* 其他資料間，**因為有很誇裝的離群職值，很難好好評估**。
+* 其他資料間，**因為有很誇張的離群值，很難好好評估**。

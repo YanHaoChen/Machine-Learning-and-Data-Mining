@@ -4,7 +4,7 @@
 
 ## Data-Mining
 * [Facebook 貼文分析 Part 1（資料前處理＋敘述統計）](https://github.com/YanHaoChen/Machine-Learning-and-Data-Mining/tree/master/facebook_post/part1.md) 
-* [Facebook 貼文分析 Part 2（運用統計圖表）](https://github.com/YanHaoChen/Machine-Learning-and-Data-Mining/tree/master/facebook_post/part2.md) （60%）
+* [Facebook 貼文分析 Part 2（視覺化數據）](https://github.com/YanHaoChen/Machine-Learning-and-Data-Mining/tree/master/facebook_post/part2.md) （60%）
 
 
 ## Hadoop
