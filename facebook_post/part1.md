@@ -9,6 +9,7 @@
 ### python 套件準備
 
 * pandas：讀取、解析資料
+* sklearn：資料處理、機器學習
 * matplotlib：視覺化圖表
 * seaborn：同用來處理視覺化的部分
 
@@ -19,7 +20,7 @@
 ```python
 import pandas as pd
 
-data = pd.read_csv('the file path of dataset')
+data = pd.read_csv('the file path of dataset', header=None)
 ```
 
 其中的屬性項目總共有 54 項，資料及文件中，都有大概說明一下。因為數據中只有資料，並沒有項目名稱，為了方便處理，將有興趣的項目名稱加入其中：

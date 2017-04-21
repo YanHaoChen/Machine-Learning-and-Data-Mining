@@ -1,8 +1,10 @@
 import pandas as pd
 import seaborn as sns
 import matplotlib.pyplot as plot
+import copy
+from sklearn import preprocessing
 
-data = pd.read_csv('./facebook_post/Dataset/Training/Features_Variant_1.csv')
+data = pd.read_csv('./facebook_post/Dataset/Training/Features_Variant_1.csv', header=None)
 headers = ['likes', 'visited','visited_and_like','page_category']
 for i in range(0,25):
     headers.extend([str(i)])
@@ -52,14 +54,6 @@ print (data)
 # first analysis: like, visit, total_comments
 first_analysis_data = data[['likes','visited','visited_and_like','total_comments']]
 print (first_analysis_data.describe())
-)
-correlation = first_analysis_data.corr()
-
-sns.set(style="white")
-ax = plot.axes()
-sns.heatmap(correlation, ax = ax)
-plot.show()
-
 
 data_likes = first_analysis_data['likes']
 data_visited = first_analysis_data['visited']
@@ -68,40 +62,46 @@ data_total_comments = first_analysis_data['total_comments']
 
 data_likes.head(5)
 data_likes.describe()
-plot.plot(data_likes)
-plot.boxplot([data_likes])
-plot.xticks([1],['likes'])
-plot.hist(data_likes)
-plot.ylabel("count")
-plot.xlabel("likes")
+ax = sns.distplot(data_likes, kde=False)
+ax.fig.savefig('./facebook_post/images/likes_histogram.png')
+ax = sns.boxplot(data_likes)
+ax.fig.savefig('./facebook_post/images/likes_boxplot.png')
 
 data_visited.head(5)
 data_visited.describe()
-plot.plot(data_visited)
-plot.boxplot([data_visited])
-plot.xticks([1],['visited'])
-plot.hist(data_visited)
-plot.ylabel("count")
-plot.xlabel("visited")
+ax = sns.distplot(data_visited, kde=False)
+ax.fig.savefig('./facebook_post/images/visited_histogram.png')
+ax = sns.boxplot(data_visited)
+ax.fig.savefig('./facebook_post/images/visited_boxplot.png')
 
 data_visited_and_like.head(5)
 data_visited_and_like.describe()
-plot.plot(data_visited_and_like)
-plot.boxplot([data_visited_and_like])
-plot.xticks([1],['visited_and_like'])
-plot.hist(data_visited_and_like)
-plot.ylabel("count")
-plot.xlabel("visited_and_like")
+ax = sns.distplot(data_visited_and_like, kde=False)
+ax.fig.savefig('./facebook_post/images/data_visited_and_like_histogram.png')
+ax = sns.boxplot(data_visited_and_like)
+ax.fig.savefig('./facebook_post/images/data_visited_and_like_boxplot.png')
+
 
 data_total_comments.head(5)
 data_total_comments.describe()
-plot.plot(data_total_comments)
-plot.boxplot([data_total_comments])
-plot.xticks([1],['total_comments'])
-plot.hist(data_total_comments)
-plot.ylabel("count")
-plot.xlabel("total_comments")
+ax = sns.distplot(data_total_comments, kde=False)
+ax.fig.savefig('./facebook_post/images/data_total_comments_histogram.png')
+ax = sns.boxplot(data_total_comments)
+ax.fig.savefig('./facebook_post/images/data_total_comments_boxplot.png')
 
+normal_scaler = preprocessing.MinMaxScaler()
+normalized_data = normal_scaler.fit_transform(first_analysis_data)
+first_analysis_data_normalized = pd.DataFrame(normalized_data, columns= first_analysis_data.columns)
+
+ax = sns.pairplot(first_analysis_data_normalized)
+ax.fig.savefig('./facebook_post/images/first_analysis_data_scatter.png')
+
+correlation = first_analysis_data.corr()
+
+sns.set(style="white")
+ax = plot.axes()
+sns.heatmap(correlation, ax = ax)
+plot.show()
 
 plot.xticks([1,2],['visited','total_comments'])
 plot.scatter(data_visited_and_like, data_total_comments, color = 'r')
