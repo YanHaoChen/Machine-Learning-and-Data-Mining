@@ -5,7 +5,7 @@ import copy
 from sklearn import preprocessing
 
 data = pd.read_csv('./facebook_post/Dataset/Training/Features_Variant_1.csv', header=None)
-headers = ['likes', 'visited','visited_and_like','page_category']
+headers = ['likes', 'have_been_there','interested','page_category']
 for i in range(0,25):
     headers.extend([str(i)])
 # 30
@@ -52,42 +52,42 @@ headers.extend(['target_var'])
 data.columns = headers
 print (data)
 # first analysis: like, visit, total_comments
-first_analysis_data = data[['likes','visited','visited_and_like','total_comments']]
+first_analysis_data = data[['likes','have_been_there','interested','total_comments']]
 print (first_analysis_data.describe())
 
 data_likes = first_analysis_data['likes']
-data_visited = first_analysis_data['visited']
-data_visited_and_like = first_analysis_data['visited_and_like']
+data_have_been_there = first_analysis_data['have_been_there']
+data_interested = first_analysis_data['interested']
 data_total_comments = first_analysis_data['total_comments']
 
 data_likes.head(5)
 data_likes.describe()
 ax = sns.distplot(data_likes, kde=False)
-ax.fig.savefig('./facebook_post/images/likes_histogram.png')
+ax.figure.savefig('./facebook_post/images/likes_histogram.png')
 ax = sns.boxplot(data_likes)
-ax.fig.savefig('./facebook_post/images/likes_boxplot.png')
+ax.figure.savefig('./facebook_post/images/likes_boxplot.png')
 
-data_visited.head(5)
-data_visited.describe()
-ax = sns.distplot(data_visited, kde=False)
-ax.fig.savefig('./facebook_post/images/visited_histogram.png')
-ax = sns.boxplot(data_visited)
-ax.fig.savefig('./facebook_post/images/visited_boxplot.png')
+data_have_been_there.head(5)
+data_have_been_there.describe()
+ax = sns.distplot(data_have_been_there, kde=False)
+ax.figure.savefig('./facebook_post/images/have_been_there_histogram.png')
+ax = sns.boxplot(data_have_been_there)
+ax.figure.savefig('./facebook_post/images/have_been_there_boxplot.png')
 
-data_visited_and_like.head(5)
-data_visited_and_like.describe()
-ax = sns.distplot(data_visited_and_like, kde=False)
-ax.fig.savefig('./facebook_post/images/data_visited_and_like_histogram.png')
-ax = sns.boxplot(data_visited_and_like)
-ax.fig.savefig('./facebook_post/images/data_visited_and_like_boxplot.png')
+data_interested.head(5)
+data_interested.describe()
+ax = sns.distplot(data_interested, kde=False)
+ax.figure.savefig('./facebook_post/images/interested_histogram.png')
+ax = sns.boxplot(data_interested)
+ax.figure.savefig('./facebook_post/images/interested_boxplot.png')
 
 
 data_total_comments.head(5)
 data_total_comments.describe()
 ax = sns.distplot(data_total_comments, kde=False)
-ax.fig.savefig('./facebook_post/images/data_total_comments_histogram.png')
+ax.figure.savefig('./facebook_post/images/total_comments_histogram.png')
 ax = sns.boxplot(data_total_comments)
-ax.fig.savefig('./facebook_post/images/data_total_comments_boxplot.png')
+ax.figure.savefig('./facebook_post/images/total_comments_boxplot.png')
 
 normal_scaler = preprocessing.MinMaxScaler()
 normalized_data = normal_scaler.fit_transform(first_analysis_data)
@@ -103,6 +103,6 @@ ax = plot.axes()
 sns.heatmap(correlation, ax = ax)
 plot.show()
 
-plot.xticks([1,2],['visited','total_comments'])
-plot.scatter(data_visited_and_like, data_total_comments, color = 'r')
-plot.scatter(data_visited, data_visited_and_like, color = 'r')
+plot.xticks([1,2],['have_been_there','total_comments'])
+plot.scatter(data_interested, data_total_comments, color = 'r')
+plot.scatter(data_have_been_there, data_interested, color = 'r')

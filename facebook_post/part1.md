@@ -27,11 +27,11 @@ data = pd.read_csv('the file path of dataset', header=None)
 
 ```python
 # 1 此文被按讚的次數
-# 2 此文被看過的次數
-# 3 看過再按讚的次數
+# 2 Po 此文的地方，有沒有其他人照訪過
+# 3 真正對此文有興趣的人數
 # 4 文章種類
 
-headers = ['likes', 'visited','visited_and_like','page_category']
+headers = ['likes', 'have_been_there','interested','page_category']
 for i in range(0,25):
     headers.extend([str(i)])
 # 30 總共的留言數
@@ -92,8 +92,8 @@ print (data)
 這樣的項目還是太多了，所以先選擇部分的項目進行分析。在這裡選擇：
 
 * （No.1）此文被按讚的次數
-* （No.2）此文被看過的次數
-* （No.3）看過再按讚的次數
+* （No.2）Po 此文的地方，有沒有其他人照訪過
+* （No.3）真正對此文有興趣的人數
 * （No.30）總共的留言數
 
 此四項進行分析，希望找出他們之間的關聯性：
