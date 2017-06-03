@@ -98,5 +98,7 @@ ax.figure.savefig('./facebook_post/images/first_analysis_data_corr.png')
 其中我們可以發現，`like`、`have_been_there`及`interested`皆屬於顯著相關。
 
 > ｜相關係數｜ < 0.4：低度相關
+>
 > 0.4 <= ｜相關係數｜ < 0.7：顯著相關
+>
 > 0.7 <｜相關係數｜ <= 1.0：高度相關
