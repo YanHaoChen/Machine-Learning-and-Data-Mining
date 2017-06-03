@@ -7,8 +7,8 @@
 
 ```python
 data_likes = first_analysis_data['likes']
-data_visited = first_analysis_data['visited']
-data_visited_and_like = first_analysis_data['visited_and_like']
+data_have_been_there = first_analysis_data['have_been_there']
+data_interested = first_analysis_data['interested']
 data_total_comments = first_analysis_data['total_comments']
 ```
 ### 透過 seaborn 繪製統計圖表（以 likes 為例）
@@ -16,7 +16,7 @@ data_total_comments = first_analysis_data['total_comments']
 
 ```python
 ax = sns.distplot(data_likes, kde=False)
-ax.fig.savefig('./facebook_post/images/likes_histogram.png')
+ax.figure.savefig('./facebook_post/images/likes_histogram.png')
 
 ```
 > distplot 預設會運算、顯示密度曲線（kde）。在這次的範例中不進行顯示，所以將參數設定為`False`。
@@ -31,7 +31,7 @@ ax.fig.savefig('./facebook_post/images/likes_histogram.png')
 
 ```python
 ax = sns.boxplot(data_likes)
-ax.fig.savefig('./facebook_post/images/visited_boxplot.png')
+ax.figure.savefig('./facebook_post/images/visited_boxplot.png')
 ```
 製作出的圖表如下：
 
@@ -57,11 +57,13 @@ normalized_data = normal_scaler.fit_transform(first_analysis_data)
 first_analysis_data_normalized = pd.DataFrame(normalized_data, columns= first_analysis_data.columns)
 ```
 
+### 散佈圖
+
 正規化後，可以先觀察資料彼此間的散佈狀況，進而判斷接下來該怎麼分析此份資料（例如：散佈狀況集中，則較有價值進行相關係數運算，如果是分散的，則否）。利用 **seaborn** 可以很容易達成此目的，方法如下：
 
 ```python
 ax = sns.pairplot(first_analysis_data_normalized)
-ax.fig.savefig('./facebook_post/images/first_analysis_data_scatter.png')
+ax.figure.savefig('./facebook_post/images/first_analysis_data_scatter.png')
 ```
 製作出的圖表如下：
 
@@ -69,5 +71,32 @@ ax.fig.savefig('./facebook_post/images/first_analysis_data_scatter.png')
 
 從中可以發現：
 
-* **total comments** 跟 **visited** 之間的分佈較為分散。很直覺的可以想到，**曝光率（visited）跟會產生的留言（total comments）關係可能沒有那麼強烈**。
-* 其他資料間，**因為有很誇張的離群值，很難好好評估**。
+* 資料間，**因為有很誇張的離群值，很難好好評估**。
+
+### 相關係數矩陣
+
+在相關係數矩陣下，較不受資料分布所影響。因係數是以資料之間的趨勢（同時上升或同時下降）所產生。
+
+```python
+correlation = first_analysis_data.corr()
+#                     likes  have_been_there  interested  total_comments
+# likes            1.000000         0.044839    0.623436        0.105624
+# have_been_there  0.044839         1.000000    0.166850        0.098352
+# interested       0.623436         0.166850    1.000000        0.329139
+# total_comments   0.105624         0.098352    0.329139        1.000000
+
+sns.set(style="white")
+ax = plot.axes()
+sns.heatmap(correlation, ax = ax)
+ax.figure.savefig('./facebook_post/images/first_analysis_data_corr.png')
+```
+
+製作出的圖表如下：
+
+![first_analysis_data_corr](https://raw.githubusercontent.com/YanHaoChen/Machine-Learning-and-Data-Mining/master/facebook_post/images/first_analysis_data_corr.png)
+
+其中我們可以發現，`like`、`have_been_there`及`interested`皆屬於顯著相關。
+
+> ｜相關係數｜ < 0.4：低度相關
+> 0.4 <= ｜相關係數｜ < 0.7：顯著相關
+> 0.7 <｜相關係數｜ <= 1.0：高度相關
