@@ -38,16 +38,19 @@ old_live_ratio = len(old[old.Survived ==1]) / len(old)
 print ("小孩：%f" % teen_live_ratio)
 print ("青壯年：%f" % man_live_ratio)
 print ("年長者：%f" % old_live_ratio)
-
+data.count()
 # Using Imputer to replace the NaN value in Age.
 from sklearn.preprocessing import Imputer
 
 imp = Imputer(strategy='most_frequent', axis=0)
-result = imp.fit_transform(data.Age[0])
-
+age_notnull = data[pd.isnull(data.Age)!= True][['Age']]
+imp.fit(age_notnull[:500]['Age'])
+result = imp.transform(data.Age[:500])
+result2 = imp.transform(data.Age[-500:])
+result = np.append(result[0],result2[0][109:])
 # Before
 print(pd.isnull(data.Age).value_counts())
-data['Age'] = pd.Series(result[0], index=data.index)
+data['Age'] = pd.Series(result, index=data.index)
 # After
 print(pd.isnull(data.Age).value_counts())
 
@@ -56,29 +59,30 @@ data.Sex[data.Sex=='female']=0
 from sklearn.decomposition import PCA
 
 pca = PCA(copy=True, iterated_power='auto', n_components=2, random_state=None,svd_solver='auto', tol=0.0, whiten=False)
-care_data =data[['Sex','Pclass','Age','SibSp','Parch','Fare']] 
+care_data =data[['Sex','Pclass','Age','SibSp','Parch','Fare','Survived']] 
 pca.fit(care_data)
-# The ratios of those components can be repesent the data.
+# The ratios of those components can be repesent the data.
 # First component
 print(pca.explained_variance_ratio_[0])
-# 0.998983441357
+# 0.921072239423
 
 # Second component
 print(pca.explained_variance_ratio_[1])
-# 0.00055995533491
+# 0.0779527221514
 
 # We can just focus on the first component.
 print(pca.components_[0])
-selected_feature = ['Sex','Pclass','Age','SibSp','Parch','Fare']
-for i in range(0,6):
-    print ("%6s: %8f" % (selected_feature[i], pca.components_[0][i]))
+selected_feature = ['Sex','Pclass','Age','SibSp','Parch','Fare','Survived']
+for i in range(0,7):
+    print ("%10s: %10f" % (selected_feature[i], pca.components_[0][i]))
 
-#    Sex: -0.001754
-# Pclass: -0.009246
-#    Age: -0.000000
-#  SibSp: 0.003544
-#  Parch: 0.003508
-#   Fare: 0.999943
+#       Sex:  -0.001747
+#    Pclass:  -0.009275
+#       Age:   0.028186
+#     SibSp:   0.003504
+#     Parch:   0.003484
+#      Fare:   0.999543
+#  Survived:   0.002512
 
 # We can observe Fare which is the most important feature.
 
@@ -86,8 +90,8 @@ for i in range(0,6):
 from sklearn.cross_validation import train_test_split as tts
 from sklearn.linear_model import LogisticRegression
 from sklearn.metrics import classification_report
-
-x_train, x_test, y_train, y_test = tts(care_data.values, data[['Survived']].values, test_size=0.8, random_state=0)
+care_data =data[['Sex','Pclass','Age','SibSp','Parch','Fare']] 
+x_train, x_test, y_train, y_test = tts(care_data.values, data[['Survived']].values, test_size=0.7, random_state=5)
 
 lr = LogisticRegression()
 lr.fit(x_train, y_train)
@@ -96,10 +100,11 @@ report = classification_report(y_test,test_predict, digits=5)
 print (report)
 
 #              precision    recall  f1-score   support
-#           0    0.85450   0.71460   0.77831       452
-#           1    0.61493   0.78927   0.69128       261
-
-# avg / total    0.76680   0.74194   0.74645       713
+#
+#           0    0.80361   0.92708   0.86094       384
+#           1    0.84530   0.63750   0.72684       240
+#
+# avg / total    0.81965   0.81571   0.80937       624
 
 # Using SVM
 from sklearn.svm import SVC
@@ -114,8 +119,8 @@ report = classification_report(y_test, test_predict,digits=5)
 print(report)
 
 #              precision    recall  f1-score   support
-# 
-#           0    0.82112   0.84292   0.83188       452
-#           1    0.71486   0.68199   0.69804       261
 #
-# avg / total    0.78222   0.78401   0.78288       713
+#           0    0.82452   0.89323   0.85750       384
+#           1    0.80288   0.69583   0.74554       240
+#
+# avg / total    0.81620   0.81731   0.81444       624
