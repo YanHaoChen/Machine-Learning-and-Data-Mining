@@ -70,7 +70,7 @@ print(pca.explained_variance_ratio_[0])
 print(pca.explained_variance_ratio_[1])
 # 0.0779527221514
 
-# We can just focus on the first component.
+# Features in first component.
 print(pca.components_[0])
 selected_feature = ['Sex','Pclass','Age','SibSp','Parch','Fare','Survived']
 for i in range(0,7):
@@ -84,7 +84,19 @@ for i in range(0,7):
 #      Fare:   0.999543
 #  Survived:   0.002512
 
-# We can observe Fare which is the most important feature.
+# Features in second component.
+print(pca.components_[1])
+for i in range(0,7):
+    print ("%10s: %10f" % (selected_feature[i], pca.components_[1][i]))
+
+#       Sex:   0.002789
+#    Pclass:  -0.013480
+#       Age:   0.999319
+#     SibSp:  -0.016513
+#     Parch:  -0.009696
+#      Fare:  -0.028200
+#  Survived:  -0.003033
+
 
 # Using LogisticRegression
 from sklearn.cross_validation import train_test_split as tts
