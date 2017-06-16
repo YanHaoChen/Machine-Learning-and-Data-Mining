@@ -7,6 +7,7 @@
 ### Facebook 貼文分析 
 * [Part 1（資料前處理＋敘述統計）](https://github.com/YanHaoChen/Machine-Learning-and-Data-Mining/tree/master/facebook_post/part1.md) 
 * [Part 2（視覺化數據）](https://github.com/YanHaoChen/Machine-Learning-and-Data-Mining/tree/master/facebook_post/part2.md)
+* [Part 3 試著脫離邊緣人](https://github.com/YanHaoChen/Machine-Learning-and-Data-Mining/tree/master/facebook_post/dont_want_to_be_a_loner.md)
 
 ### Titanic 存活分析
 * [Part 1（Survived vs Age）](https://github.com/YanHaoChen/Machine-Learning-and-Data-Mining/blob/master/titanic/part1.md) 
