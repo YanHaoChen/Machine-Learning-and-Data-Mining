@@ -68,8 +68,6 @@ with open('./facebook_post/category_list.txt','r') as f:
    for category in f:
        category_list.append(str(category.strip()))
 
-
-
 for category in category_list:
     care_data[category] = pd.Series(np.zeros(care_data.count()[0]), index=care_data.index)
 
@@ -264,12 +262,12 @@ clf = clf.fit(lv1_cluster, lv1_target)
 header_ar = lv1_cluster.columns
 
 dot_data=tree.export_graphviz(clf,out_file=None,\
-                                max_depth=5,\
+                                max_depth=4,\
                          feature_names=header_ar,\
                          class_names=['loner','key man'],\
                          filled=True, rounded=True,\
                          special_characters=True)
 
 graph = pydotplus.graph_from_dot_data(dot_data)
-graph.write_pdf("post.pdf")
+graph.write_pdf("tree.pdf")
 

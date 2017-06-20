@@ -81,7 +81,7 @@ ax.figure.savefig('./facebook_post/images/interested_histogram.png')
 ax = sns.boxplot(data_interested)
 ax.figure.savefig('./facebook_post/images/interested_boxplot.png')
 
-
+plot.cla()
 data_total_comments.head(5)
 data_total_comments.describe()
 ax = sns.distplot(data_total_comments, kde=False)
